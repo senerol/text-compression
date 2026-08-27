@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #0f1115;
+    color: #e8eaed;
+}
+.app-main {
+    display: flex;      /* lay children out in a row by default */
+    gap: 20px;           /* space between the two panels, no manual margins */
+    padding: 20px;
+}
+
+.panel {
+    flex: 1;             /* each panel grows to take equal available space */
+    background: #171a21;
+    border: 1px solid #262b36;
+    border-radius: 10px;
+    padding: 16px;
+}
+:root {
+    --accent: #5eead4;
+}
+
+#encode {
+    background: var(--accent);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
