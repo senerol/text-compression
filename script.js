@@ -31,18 +31,22 @@ function handleFile(mode) {
         }
 
         if (mode === 'encode') {
+            const start = performance.now();  
             const { payload, tree } = encode(text);
+            const elapsed = performance.now() - start;
             downloadFile(file.name.split('.')[0] + '_encoded.txt', payload);
             renderTree(treeArea, tree);   // NEW: draw the tree
 
             const ratio = (text.length / payload.length).toFixed(2);
-            statsEl.textContent = `Original: ${text.length} chars, Compressed: ${payload.length} bytes, Ratio: ${ratio}x`;
+          statsEl.textContent = `Original: ${text.length} chars, Compressed: ${payload.length} bytes, Ratio: ${ratio}x, Encoding time: ${elapsed.toFixed(2)} ms`;
         } else {
+            const start = performance.now();
             const { text: decoded, tree } = decode(text);   // CHANGED: decode now returns { text, tree }
+            const elapsed = performance.now() - start; 
             downloadFile(file.name.split('.')[0] + '_decoded.txt', decoded);
             renderTree(treeArea, tree);   // NEW: draw the tree
 
-            statsEl.textContent = `Decoded ${decoded.length} characters`;
+            statsEl.textContent = `Decoded ${decoded.length} characters, Decoding time: ${elapsed.toFixed(2)} ms`;
         }
     };
     reader.readAsText(file);
